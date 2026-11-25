@@ -40,6 +40,7 @@ export const login = async(req:Request, res:Response)=>{
         });
         
     }catch(error){
+        console.log(error)
         return res.status(500).json({success:false , message:"Login Failed"})
 
     }

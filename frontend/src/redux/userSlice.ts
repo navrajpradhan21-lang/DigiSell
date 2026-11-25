@@ -1,0 +1,38 @@
+import { createSlice } from "@reduxjs/toolkit";
+import type { IUser } from "@/App";
+import type { PayloadAction } from "@reduxjs/toolkit";
+
+interface IUserState{
+    user:IUser | null;
+    loading:boolean
+};
+
+const initialState : IUserState={
+    user:null,
+    loading:true
+};
+
+
+const userSlice = createSlice({
+    name:"user",
+    initialState,
+    reducers:{
+        setUser:(state,action:PayloadAction<IUser |null>)=>{
+            state.user = action.payload
+        },
+        setLoading:(state,action:PayloadAction<boolean>)=>{
+            state.loading = action.payload
+        },
+        logoutUser:(state)=>{
+            state.user = null
+        }
+    }
+});
+
+export const {
+    setUser,
+    setLoading,
+    logoutUser
+} = userSlice.actions;
+
+export default userSlice.reducer;

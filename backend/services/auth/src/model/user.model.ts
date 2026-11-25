@@ -88,9 +88,10 @@ const userSchema = new mongoose.Schema<IUser>({
         default: "partner"
     },
     partnerProfile:{
-        slug:{
+        slug: {
             type:String,
-            unique: true,
+            unique:true,
+            sparse:true
         },
         bio:{
             type:String,
@@ -163,6 +164,16 @@ const userSchema = new mongoose.Schema<IUser>({
 
 
 },{timestamps:true})
+
+// Users without a partner profile have no slug. A normal unique index also
+// indexes missing/null values, so keep uniqueness only for actual string slugs.
+// userSchema.index(
+//     { "partnerProfile.slug": 1 },
+//     {
+//         unique: true,
+//         partialFilterExpression: { "partnerProfile.slug": { $type: "string" } },
+//     }
+// );
 
 const User = mongoose.model("User",userSchema);
 export default User;
