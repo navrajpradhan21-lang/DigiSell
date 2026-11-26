@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import api from "@/utils/axios";
 import { useDispatch } from "react-redux";
 import type { AppDispatch } from "@/redux/store";
-import { setLoading, setUser } from "@/redux/userSlice";
+import { setAdmin, setLoading, setUser } from "@/redux/userSlice";
 import type { IUser } from "@/App";
 
 export const getCurrentUser = ()=>{
@@ -24,8 +24,26 @@ export const getCurrentUser = ()=>{
             }catch(error){
                 console.log(error)
                 dispatch(setLoading(false))
+                dispatch(setUser(null))
             }
         }
+        
+        const fetchAdmin = async()=>{
+            try{
+                const response = await api.get("/api/auth/admin")
+                if(response.data.success){
+                    dispatch(setAdmin(response.data.admin))
+                }
+                console.log(response)
+            }catch(error){
+                console.log(error)
+                dispatch(setAdmin(null))
+
+            }
+
+        }
         fetchUser();
+        fetchAdmin();
+
     },[])
 }

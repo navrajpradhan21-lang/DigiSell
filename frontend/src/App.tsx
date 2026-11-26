@@ -43,19 +43,19 @@ interface IPaymentdetails{
 
 
 export interface IUser{
-  _id?:string,
+  _id?:string;
 
-  firebaseUid:string,
+  firebaseUid:string;
 
-  name:string,
+  name:string;
 
-  email:String,
+  email:String;
 
-  role:"partner"|"admin",
+  role:"partner"|"admin";
   
-  partnerProfile:IPartnerprofile,
+  partnerProfile:IPartnerprofile;
   
-  paymentDetails: IPaymentdetails,
+  paymentDetails: IPaymentdetails;
 
   totalSales: number;
 
@@ -67,6 +67,12 @@ export interface IUser{
 
   updatedAt: Date;
 }
+
+export interface IAdmin{
+  name:string;
+  email:string
+}
+
 
 
 const App = () => {

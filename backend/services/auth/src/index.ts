@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 import { connectDb } from './config/db.js';
 import authRouter from './routes/auth.routes.js';
+import adminRouter from './routes/admin.route.js';
 
 
 dotenv.config();
@@ -21,6 +22,7 @@ app.get('/',(req,res)=>{
     res.json("Hello from DigiSeller AuthService")
 })
 app.use("/",authRouter);
+app.use("/admin",adminRouter);
 
 
 const startServer = async () => {
